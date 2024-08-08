@@ -1,0 +1,2517 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>NIRMAATA</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+  <script>/**
+    * Template Name: Yummy
+    * Template URL: https://bootstrapmade.com/yummy-bootstrap-restaurant-website-template/
+    * Updated: Jun 29 2024 with Bootstrap v5.3.3
+    * Author: BootstrapMade.com
+    * License: https://bootstrapmade.com/license/
+    */
+    
+    (function() {
+      "use strict";
+    
+      /**
+       * Apply .scrolled class to the body as the page is scrolled down
+       */
+      function toggleScrolled() {
+        const selectBody = document.querySelector('body');
+        const selectHeader = document.querySelector('#header');
+        if (!selectHeader.classList.contains('scroll-up-sticky') && !selectHeader.classList.contains('sticky-top') && !selectHeader.classList.contains('fixed-top')) return;
+        window.scrollY > 100 ? selectBody.classList.add('scrolled') : selectBody.classList.remove('scrolled');
+      }
+    
+      document.addEventListener('scroll', toggleScrolled);
+      window.addEventListener('load', toggleScrolled);
+    
+      /**
+       * Mobile nav toggle
+       */
+      const mobileNavToggleBtn = document.querySelector('.mobile-nav-toggle');
+    
+      function mobileNavToogle() {
+        document.querySelector('body').classList.toggle('mobile-nav-active');
+        mobileNavToggleBtn.classList.toggle('bi-list');
+        mobileNavToggleBtn.classList.toggle('bi-x');
+      }
+      mobileNavToggleBtn.addEventListener('click', mobileNavToogle);
+    
+      /**
+       * Hide mobile nav on same-page/hash links
+       */
+      document.querySelectorAll('#navmenu a').forEach(navmenu => {
+        navmenu.addEventListener('click', () => {
+          if (document.querySelector('.mobile-nav-active')) {
+            mobileNavToogle();
+          }
+        });
+    
+      });
+    
+      /**
+       * Toggle mobile nav dropdowns
+       */
+      document.querySelectorAll('.navmenu .toggle-dropdown').forEach(navmenu => {
+        navmenu.addEventListener('click', function(e) {
+          e.preventDefault();
+          this.parentNode.classList.toggle('active');
+          this.parentNode.nextElementSibling.classList.toggle('dropdown-active');
+          e.stopImmediatePropagation();
+        });
+      });
+    
+      /**
+       * Preloader
+       */
+      const preloader = document.querySelector('#preloader');
+      if (preloader) {
+        window.addEventListener('load', () => {
+          preloader.remove();
+        });
+      }
+      
+    
+        document.querySelectorAll('#navmenu a').forEach(navmenu => {
+        navmenu.addEventListener('click', () => {
+          if (document.querySelector('.mobile-nav-active')) {
+            mobileNavToogle();
+          }
+        });
+    
+      });
+    
+      /**
+       * Toggle mobile nav dropdowns
+       */
+      document.querySelectorAll('.navmenu .toggle-dropdown').forEach(navmenu => {
+        navmenu.addEventListener('click', function(e) {
+          e.preventDefault();
+          this.parentNode.classList.toggle('active');
+          this.parentNode.nextElementSibling.classList.toggle('dropdown-active');
+          e.stopImmediatePropagation();
+        });
+      });
+    
+      /**
+       * Preloader
+       */
+    
+      document.addEventListener("DOMContentLoaded", function() {
+        const orbit = document.querySelector(".orbit");
+        const circles = document.querySelectorAll(".small-circle");
+        const numCircles = circles.length;
+        const radius = orbit.offsetWidth / 2 - circles[0].offsetWidth / 2; 
+        const centerX = orbit.offsetWidth / 2;
+        const centerY = orbit.offsetHeight / 2;
+    
+        circles.forEach((circle, index) => {
+            const angle = (index / numCircles) * 2 * Math.PI;
+            const x = centerX + radius * Math.cos(angle) - circle.offsetWidth / 2;
+            const y = centerY + radius * Math.sin(angle) - circle.offsetHeight / 2;
+            circle.style.left = `${x}px`;
+            circle.style.top = `${y}px`;
+        });
+    
+        let angle = 0;
+        function rotateCircles() {
+            angle += 0.01;
+            circles.forEach((circle, index) => {
+                const angleOffset = (index / numCircles) * 2 * Math.PI + angle;
+                const x = centerX + radius * Math.cos(angleOffset) - circle.offsetWidth / 2;
+                const y = centerY + radius * Math.sin(angleOffset) - circle.offsetHeight / 2;
+                circle.style.left = `${x}px`;
+                circle.style.top = `${y}px`;
+                circle.querySelector('span').style.transform = `rotate(${-angleOffset}rad)`; // Counter the rotation
+            });
+            requestAnimationFrame(rotateCircles);
+        }
+    
+        function mergeAndReappear() {
+            circles.forEach((circle) => {
+                circle.style.transform = `translate(${centerX - circle.offsetLeft - circle.offsetWidth / 2}px, ${centerY - circle.offsetTop - circle.offsetHeight / 2}px)`;
+                circle.style.opacity = 0;
+            });
+    
+            setTimeout(() => {
+                circles.forEach((circle, index) => {
+                    const angle = (index / numCircles) * 2 * Math.PI;
+                    const x = centerX + radius * Math.cos(angle) - circle.offsetWidth / 2;
+                    const y = centerY + radius * Math.sin(angle) - circle.offsetHeight / 2;
+                    circle.style.left = `${x}px`;
+                    circle.style.top = `${y}px`;
+                    circle.style.transform = 'none';
+                    circle.style.opacity = 1;
+                });
+                setTimeout(mergeAndReappear, 3000); // Repeat after 3 seconds
+            }, 3000); // Merge and reappear after 5 seconds
+        }
+    
+        rotateCircles(); // Start rotating circles
+        mergeAndReappear(); // Start merge and reappear loop
+    });
+    
+      /**
+       * Scroll top button
+       */
+      let scrollTop = document.querySelector('.scroll-top');
+    
+      function toggleScrollTop() {
+        if (scrollTop) {
+          window.scrollY > 100 ? scrollTop.classList.add('active') : scrollTop.classList.remove('active');
+        }
+      }
+      scrollTop.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+    
+      window.addEventListener('load', toggleScrollTop);
+      document.addEventListener('scroll', toggleScrollTop);
+    
+      /**
+       * Animation on scroll function and init
+       */
+      function aosInit() {
+        AOS.init({
+          duration: 600,
+          easing: 'ease-in-out',
+          once: true,
+          mirror: false
+        });
+      }
+      window.addEventListener('load', aosInit);
+    
+      /**
+       * Initiate glightbox
+       */
+      const glightbox = GLightbox({
+        selector: '.glightbox'
+      });
+    
+      /**
+       * Initiate Pure Counter
+       */
+      new PureCounter();
+    
+      /**
+       * Init swiper sliders
+       */
+      function initSwiper() {
+        document.querySelectorAll(".init-swiper").forEach(function(swiperElement) {
+          let config = JSON.parse(
+            swiperElement.querySelector(".swiper-config").innerHTML.trim()
+          );
+    
+          if (swiperElement.classList.contains("swiper-tab")) {
+            initSwiperWithCustomPagination(swiperElement, config);
+          } else {
+            new Swiper(swiperElement, config);
+          }
+        });
+      }
+    
+      window.addEventListener("load", initSwiper);
+    
+      /**
+       * Correct scrolling position upon page load for URLs containing hash links.
+       */
+      window.addEventListener('load', function(e) {
+        if (window.location.hash) {
+          if (document.querySelector(window.location.hash)) {
+            setTimeout(() => {
+              let section = document.querySelector(window.location.hash);
+              let scrollMarginTop = getComputedStyle(section).scrollMarginTop;
+              window.scrollTo({
+                top: section.offsetTop - parseInt(scrollMarginTop),
+                behavior: 'smooth'
+              });
+            }, 100);
+          }
+        }
+      });
+    
+      /**
+       * Navmenu Scrollspy
+       */
+      let navmenulinks = document.querySelectorAll('.navmenu a');
+    
+      function navmenuScrollspy() {
+        navmenulinks.forEach(navmenulink => {
+          if (!navmenulink.hash) return;
+          let section = document.querySelector(navmenulink.hash);
+          if (!section) return;
+          let position = window.scrollY + 200;
+          if (position >= section.offsetTop && position <= (section.offsetTop + section.offsetHeight)) {
+            document.querySelectorAll('.navmenu a.active').forEach(link => link.classList.remove('active'));
+            navmenulink.classList.add('active');
+          } else {
+            navmenulink.classList.remove('active');
+          }
+        })
+      }
+      window.addEventListener('load', navmenuScrollspy);
+      document.addEventListener('scroll', navmenuScrollspy);
+    
+    })();
+    </script>
+  <style>
+    /**
+* Template Name: Yummy
+* Template URL: https://bootstrapmade.com/yummy-bootstrap-restaurant-website-template/
+* Updated: Jun 29 2024 with Bootstrap v5.3.3
+* Author: BootstrapMade.com
+* License: https://bootstrapmade.com/license/
+*/
+
+/*--------------------------------------------------------------
+# Font & Color Variables
+# Help: https://bootstrapmade.com/color-system/
+--------------------------------------------------------------*/
+/* Fonts */
+:root {
+  --default-font: "Roboto",  system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --heading-font: "Amatic SC",  sans-serif;
+  --nav-font: "Inter",  sans-serif;
+}
+
+/* Global Colors - The following color variables are used throughout the website. Updating them here will change the color scheme of the entire website */
+:root { 
+  --background-color: #ffffff; /* Background color for the entire website, including individual sections */
+  --default-color: #212529; /* Default color used for the majority of the text content across the entire website */
+  --heading-color: #37373f; /* Color for headings, subheadings and title throughout the website */
+  --accent-color: #ce1212; /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
+  --surface-color: #ffffff; /* The surface color is used as a background of boxed elements within sections, such as cards, icon boxes, or other elements that require a visual separation from the global background. */
+  --contrast-color: #ffffff; /* Contrast color for text, ensuring readability against backgrounds of accent, heading, or default colors. */
+}
+
+/* Nav Menu Colors - The following color variables are used specifically for the navigation menu. They are separate from the global colors to allow for more customization options */
+:root {
+  --nav-color: #7f7f90;  /* The default color of the main navmenu links */
+  --nav-hover-color: #ce1212; /* Applied to main navmenu links when they are hovered over or active */
+  --nav-mobile-background-color: #ffffff; /* Used as the background color for mobile navigation menu */
+  --nav-dropdown-background-color: #ffffff; /* Used as the background color for dropdown items that appear when hovering over primary navigation items */
+  --nav-dropdown-color: #7f7f90; /* Used for navigation links of the dropdown items in the navigation menu. */
+  --nav-dropdown-hover-color: #ce1212; /* Similar to --nav-hover-color, this color is applied to dropdown navigation links when they are hovered over. */
+}
+
+/* Color Presets - These classes override global colors when applied to any section or element, providing reuse of the sam color scheme. */
+
+.light-background {
+  --background-color: #f2f2f2;
+  --surface-color: #ffffff;
+}
+
+.dark-background {
+  --background-color: #1f1f24;
+  --default-color: #ffffff;
+  --heading-color: #ffffff;
+  --surface-color: #37373f;
+  --contrast-color: #ffffff;
+}
+
+/* Smooth scroll */
+:root {
+  scroll-behavior: smooth;
+}
+
+/*--------------------------------------------------------------
+# General Styling & Shared Classes
+--------------------------------------------------------------*/
+body {
+  color: var(--default-color);
+  background-color: var(--background-color);
+  font-family: var(--default-font);
+  margin: 0;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+  perspective: 1000px;
+  animation: gradientBackground 10s infinite;
+}
+
+@keyframes gradientBackground {
+  0% {
+      background: linear-gradient(45deg, #FFC0CB, #D3D3D3);
+  }
+  50% {
+      background: linear-gradient(45deg, #D3D3D3, #FFC0CB);
+  }
+  100% {
+      background: linear-gradient(45deg, #FFC0CB, #D3D3D3);
+  }
+}
+
+.center-circle {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  
+}
+
+.main-circle {
+  
+  width: 20vw;
+  height: 20vw;
+  background: url("C:/Users/mithi/Desktop/New folder (2)/img-20210110-095838-jpg-500x500.webp") no-repeat center center / cover;
+  border-radius: 50%;
+  position: absolute;
+  left: 750px;
+  box-shadow:0 4px 15px rgba(255, 107, 107, 0.4);
+}
+
+.orbit {
+  position: relative;
+  width: 35vw;
+  height: 35vw;
+  border-radius: 50%;
+  animation: rotateOrbit 20s linear infinite;
+  left: 635px;
+} 
+
+@keyframes rotateOrbit {
+  0% {
+      transform: rotate(0deg);
+  }
+  100% {
+      transform: rotate(360deg);
+  }
+}
+
+.small-circle {
+  width: 5vw;
+  height: 5vw;
+  border-radius:100%;
+  position: absolute;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+  font-size: 0.6vw;
+  padding: 1vw;
+  line-height: 1.1;
+  background: grey;
+  transform-style: preserve-3d;
+  word-wrap: break-word;
+  opacity: 1;
+  transition: transform 2s, opacity 2s;
+}
+
+.small-circle span {
+  display: block;
+  width: 100%;
+  word-wrap: break-word;
+}
+
+.circle1 { background: #e53935; }
+.circle2 { background: #ffb300; }
+.circle3 { background: #fdd835; }
+.circle4 { background: #43a047; }
+.circle5 { background: #1e88e5; }
+.circle6 { background: #8e24aa; }
+.circle7 { background: #d32f2f; }
+a {
+  color: var(--accent-color);
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+a:hover {
+  color: color-mix(in srgb, var(--accent-color), transparent 25%);
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--heading-color);
+  font-family: var(--heading-font);
+}
+
+/* Pulsating Play Button
+------------------------------*/
+.pulsating-play-btn {
+  width: 94px;
+  height: 94px;
+  background: radial-gradient(var(--accent-color) 50%, color-mix(in srgb, var(--accent-color), transparent 75%) 52%);
+  border-radius: 50%;
+  display: block;
+  position: relative;
+  overflow: hidden;
+}
+
+.pulsating-play-btn:before {
+  content: "";
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  animation-delay: 0s;
+  animation: pulsate-play-btn 2s;
+  animation-direction: forwards;
+  animation-iteration-count: infinite;
+  animation-timing-function: steps;
+  opacity: 1;
+  border-radius: 50%;
+  border: 5px solid color-mix(in srgb, var(--accent-color), transparent 30%);
+  top: -15%;
+  left: -15%;
+  background: rgba(198, 16, 0, 0);
+}
+
+.pulsating-play-btn:after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-40%) translateY(-50%);
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-left: 15px solid #fff;
+  z-index: 100;
+  transition: all 400ms cubic-bezier(0.55, 0.055, 0.675, 0.19);
+}
+
+.pulsating-play-btn:hover:before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-40%) translateY(-50%);
+  width: 0;
+  height: 0;
+  border: none;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-left: 15px solid #fff;
+  z-index: 200;
+  animation: none;
+  border-radius: 0;
+}
+
+.pulsating-play-btn:hover:after {
+  border-left: 15px solid var(--accent-color);
+  transform: scale(20);
+}
+
+@keyframes pulsate-play-btn {
+  0% {
+    transform: scale(0.6, 0.6);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1, 1);
+    opacity: 0;
+  }
+}
+
+/* PHP Email Form Messages
+------------------------------*/
+.php-email-form .error-message {
+  display: none;
+  background: #df1529;
+  color: #ffffff;
+  text-align: left;
+  padding: 15px;
+  margin-bottom: 24px;
+  font-weight: 600;
+}
+
+.php-email-form .sent-message {
+  display: none;
+  color: #ffffff;
+  background: #059652;
+  text-align: center;
+  padding: 15px;
+  margin-bottom: 24px;
+  font-weight: 600;
+}
+
+.php-email-form .loading {
+  display: none;
+  background: var(--surface-color);
+  text-align: center;
+  padding: 15px;
+  margin-bottom: 24px;
+}
+
+.php-email-form .loading:before {
+  content: "";
+  display: inline-block;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  margin: 0 10px -6px 0;
+  border: 3px solid var(--accent-color);
+  border-top-color: var(--surface-color);
+  animation: php-email-form-loading 1s linear infinite;
+}
+
+@keyframes php-email-form-loading {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/*--------------------------------------------------------------
+# Global Header
+--------------------------------------------------------------*/
+.header {
+  color: var(--default-color);
+  background-color: var(--background-color);
+  padding: 20px 0;
+  transition: all 0.5s;
+  z-index: 997;
+}
+
+.header .logo {
+  line-height: 1;
+}
+
+.header .logo img {
+  max-height: 36px;
+  margin-right: 8px;
+}
+
+.header .logo h1 {
+  font-size: 30px;
+  margin: 0;
+  font-weight: 700;
+  color: var(--heading-color);
+  font-family: var(--default-font);
+}
+
+.header .logo span {
+  color: var(--accent-color);
+  font-size: 36px;
+}
+
+.header .btn-getstarted,
+.header .btn-getstarted:focus {
+  color: var(--contrast-color);
+  background: var(--accent-color);
+  font-size: 14px;
+  padding: 8px 26px;
+  margin: 0;
+  border-radius: 50px;
+  transition: 0.3s;
+}
+
+.header .btn-getstarted:hover,
+.header .btn-getstarted:focus:hover {
+  color: var(--contrast-color);
+  background: color-mix(in srgb, var(--accent-color), transparent 15%);
+}
+
+@media (max-width: 1200px) {
+  .header .logo {
+    order: 1;
+  }
+
+  .header .btn-getstarted {
+    order: 2;
+    margin: 0 15px 0 0;
+    padding: 6px 20px;
+  }
+
+  .header .navmenu {
+    order: 3;
+  }
+}
+
+.scrolled .header {
+  box-shadow: 0px 0 18px rgba(0, 0, 0, 0.1);
+}
+
+/*--------------------------------------------------------------
+# Navigation Menu
+--------------------------------------------------------------*/
+/* Desktop Navigation */
+@media (min-width: 1200px) {
+  .navmenu {
+    padding: 0;
+  }
+
+  .navmenu ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    list-style: none;
+    align-items: center;
+  }
+
+  .navmenu li {
+    position: relative;
+  }
+
+  .navmenu>ul>li {
+    white-space: nowrap;
+    padding: 15px 14px;
+  }
+
+  .navmenu>ul>li:last-child {
+    padding-right: 0;
+  }
+
+  .navmenu a,
+  .navmenu a:focus {
+    color: var(--nav-color);
+    font-size: 15px;
+    padding: 0 2px;
+    font-family: var(--nav-font);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    white-space: nowrap;
+    transition: 0.3s;
+    position: relative;
+  }
+
+  .navmenu a i,
+  .navmenu a:focus i {
+    font-size: 12px;
+    line-height: 0;
+    margin-left: 5px;
+    transition: 0.3s;
+  }
+
+  .navmenu>ul>li>a:before {
+    content: "";
+    position: absolute;
+    height: 2px;
+    bottom: -6px;
+    left: 0;
+    background-color: var(--nav-hover-color);
+    visibility: hidden;
+    width: 0px;
+    transition: all 0.3s ease-in-out 0s;
+  }
+
+  .navmenu a:hover:before,
+  .navmenu li:hover>a:before,
+  .navmenu .active:before {
+    visibility: visible;
+    width: 100%;
+  }
+
+  .navmenu li:hover>a,
+  .navmenu .active,
+  .navmenu .active:focus {
+    color: color-mix(in srgb, var(--nav-color) 80%, black 50%);
+  }
+
+  .navmenu .dropdown ul {
+    margin: 0;
+    padding: 10px 0;
+    background: var(--nav-dropdown-background-color);
+    display: block;
+    position: absolute;
+    visibility: hidden;
+    left: 14px;
+    top: 130%;
+    opacity: 0;
+    transition: 0.3s;
+    border-radius: 4px;
+    z-index: 99;
+    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  .navmenu .dropdown ul li {
+    min-width: 200px;
+  }
+
+  .navmenu .dropdown ul a {
+    padding: 10px 20px;
+    font-size: 15px;
+    text-transform: none;
+    color: var(--nav-dropdown-color);
+  }
+
+  .navmenu .dropdown ul a i {
+    font-size: 12px;
+  }
+
+  .navmenu .dropdown ul a:hover,
+  .navmenu .dropdown ul .active:hover,
+  .navmenu .dropdown ul li:hover>a {
+    color: var(--nav-dropdown-hover-color);
+  }
+
+  .navmenu .dropdown:hover>ul {
+    opacity: 1;
+    top: 100%;
+    visibility: visible;
+  }
+
+  .navmenu .dropdown .dropdown ul {
+    top: 0;
+    left: -90%;
+    visibility: hidden;
+  }
+
+  .navmenu .dropdown .dropdown:hover>ul {
+    opacity: 1;
+    top: 0;
+    left: -100%;
+    visibility: visible;
+  }
+}
+
+/* Mobile Navigation */
+@media (max-width: 1199px) {
+  .mobile-nav-toggle {
+    color: var(--nav-color);
+    font-size: 28px;
+    line-height: 0;
+    margin-right: 10px;
+    cursor: pointer;
+    transition: color 0.3s;
+  }
+
+  .navmenu {
+    padding: 0;
+    z-index: 9997;
+  }
+
+  .navmenu ul {
+    display: none;
+    position: absolute;
+    inset: 60px 20px 20px 20px;
+    padding: 10px 0;
+    margin: 0;
+    border-radius: 6px;
+    background-color: var(--nav-mobile-background-color);
+    border: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
+    box-shadow: none;
+    overflow-y: auto;
+    transition: 0.3s;
+    z-index: 9998;
+  }
+
+  .navmenu a,
+  .navmenu a:focus {
+    color: var(--nav-dropdown-color);
+    padding: 10px 20px;
+    font-family: var(--nav-font);
+    font-size: 17px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    white-space: nowrap;
+    transition: 0.3s;
+  }
+
+  .navmenu a i,
+  .navmenu a:focus i {
+    font-size: 12px;
+    line-height: 0;
+    margin-left: 5px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: 0.3s;
+    background-color: color-mix(in srgb, var(--accent-color), transparent 90%);
+  }
+
+  .navmenu a i:hover,
+  .navmenu a:focus i:hover {
+    background-color: var(--accent-color);
+    color: var(--contrast-color);
+  }
+
+  .navmenu a:hover,
+  .navmenu .active,
+  .navmenu .active:focus {
+    color: var(--nav-dropdown-hover-color);
+  }
+
+  .navmenu .active i,
+  .navmenu .active:focus i {
+    background-color: var(--accent-color);
+    color: var(--contrast-color);
+    transform: rotate(180deg);
+  }
+
+  .navmenu .dropdown ul {
+    position: static;
+    display: none;
+    z-index: 99;
+    padding: 10px 0;
+    margin: 10px 20px;
+    background-color: var(--nav-dropdown-background-color);
+    transition: all 0.5s ease-in-out;
+  }
+
+  .navmenu .dropdown ul ul {
+    background-color: rgba(33, 37, 41, 0.1);
+  }
+
+  .navmenu .dropdown>.dropdown-active {
+    display: block;
+    background-color: rgba(33, 37, 41, 0.03);
+  }
+
+  .mobile-nav-active {
+    overflow: hidden;
+  }
+
+  .mobile-nav-active .mobile-nav-toggle {
+    color: #fff;
+    position: absolute;
+    font-size: 32px;
+    top: 15px;
+    right: 15px;
+    margin-right: 0;
+    z-index: 9999;
+  }
+
+  .mobile-nav-active .navmenu {
+    position: fixed;
+    overflow: hidden;
+    inset: 0;
+    background: rgba(33, 37, 41, 0.8);
+    transition: 0.3s;
+  }
+
+  .mobile-nav-active .navmenu>ul {
+    display: block;
+  }
+}
+
+/*--------------------------------------------------------------
+# Global Footer
+--------------------------------------------------------------*/
+.footer {
+  --heading-font: var(--default-font);
+  color: var(--default-color);
+  background-color: var(--background-color);
+  font-size: 14px;
+  padding: 40px 0;
+  position: relative;
+}
+
+.footer .icon {
+  color: var(--accent-color);
+  margin-right: 15px;
+  font-size: 24px;
+  line-height: 0;
+}
+
+.footer h4 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.footer .address p {
+  margin-bottom: 0px;
+}
+
+.footer .social-links a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid color-mix(in srgb, var(--default-color), transparent 50%);
+  font-size: 16px;
+  color: color-mix(in srgb, var(--default-color), transparent 50%);
+  margin-right: 10px;
+  transition: 0.3s;
+}
+
+.footer .social-links a:hover {
+  color: var(--accent-color);
+  border-color: var(--accent-color);
+}
+
+.footer .copyright {
+  padding-top: 20px;
+  border-top: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
+}
+
+.footer .copyright p {
+  margin-bottom: 0;
+}
+
+.footer .credits {
+  margin-top: 5px;
+  font-size: 13px;
+}
+
+/*--------------------------------------------------------------
+# Preloader
+--------------------------------------------------------------*/
+#preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  overflow: hidden;
+  background-color: var(--background-color);
+  transition: all 0.6s ease-out;
+  width: 100%;
+  height: 100vh;
+}
+
+#preloader:before,
+#preloader:after {
+  content: "";
+  position: absolute;
+  border: 4px solid var(--accent-color);
+  border-radius: 50%;
+  animation: animate-preloader 2s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+
+#preloader:after {
+  animation-delay: -0.5s;
+}
+
+@keyframes animate-preloader {
+  0% {
+    width: 10px;
+    height: 10px;
+    top: calc(50% - 5px);
+    left: calc(50% - 5px);
+    opacity: 1;
+  }
+
+  100% {
+    width: 72px;
+    height: 72px;
+    top: calc(50% - 36px);
+    left: calc(50% - 36px);
+    opacity: 0;
+  }
+}
+
+/*--------------------------------------------------------------
+# Scroll Top Button
+--------------------------------------------------------------*/
+.scroll-top {
+  position: fixed;
+  visibility: hidden;
+  opacity: 0;
+  right: 15px;
+  bottom: -15px;
+  z-index: 99999;
+  background-color: var(--accent-color);
+  width: 44px;
+  height: 44px;
+  border-radius: 50px;
+  transition: all 0.4s;
+}
+
+.scroll-top i {
+  font-size: 24px;
+  color: var(--contrast-color);
+  line-height: 0;
+}
+
+.scroll-top:hover {
+  background-color: color-mix(in srgb, var(--accent-color), transparent 20%);
+  color: var(--contrast-color);
+}
+
+.scroll-top.active {
+  visibility: visible;
+  opacity: 1;
+  bottom: 15px;
+}
+
+/*--------------------------------------------------------------
+# Disable aos animation delay on mobile devices
+--------------------------------------------------------------*/
+@media screen and (max-width: 768px) {
+  [data-aos-delay] {
+    transition-delay: 0 !important;
+  }
+}
+
+/*--------------------------------------------------------------
+# Global Page Titles & Breadcrumbs
+--------------------------------------------------------------*/
+.page-title {
+  --background-color: color-mix(in srgb, var(--default-color), transparent 96%);
+  color: var(--default-color);
+  background-color: var(--background-color);
+  padding: 120px 0;
+  text-align: center;
+  position: relative;
+}
+
+.page-title h1 {
+  font-size: 42px;
+  font-weight: 400;
+  margin-bottom: 10px;
+  font-family: var(--default-font);
+}
+
+.page-title .breadcrumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.page-title .breadcrumbs ol li+li {
+  padding-left: 10px;
+}
+
+.page-title .breadcrumbs ol li+li::before {
+  content: "/";
+  display: inline-block;
+  padding-right: 10px;
+  color: color-mix(in srgb, var(--default-color), transparent 70%);
+}
+
+/*--------------------------------------------------------------
+# Global Sections
+--------------------------------------------------------------*/
+section,
+.section {
+  color: var(--default-color);
+  background-color: var(--background-color);
+  padding: 60px 0;
+  scroll-margin-top: 92px;
+  overflow: clip;
+}
+
+@media (max-width: 1199px) {
+
+  section,
+  .section {
+    scroll-margin-top: 56px;
+  }
+}
+
+/*--------------------------------------------------------------
+# Global Section Titles
+--------------------------------------------------------------*/
+.section-title {
+  text-align: center;
+  padding-bottom: 60px;
+  position: relative;
+}
+
+.section-title h2 {
+  font-size: 13px;
+  letter-spacing: 1px;
+  font-weight: 400;
+  padding: 0;
+  margin: 0;
+  color: color-mix(in srgb, var(--default-color), transparent 50%);
+  display: inline-block;
+  text-transform: uppercase;
+  font-family: var(--default-font);
+}
+
+.section-title p {
+  color: var(--heading-color);
+  margin: 10px 0 0 0;
+  font-size: 48px;
+  font-weight: 500;
+  font-family: var(--heading-font);
+}
+
+.section-title p .description-title {
+  color: var(--accent-color);
+}
+
+/*--------------------------------------------------------------
+# Hero Section
+--------------------------------------------------------------*/
+.hero {
+  width: 100%;
+  min-height: 60vh;
+  position: relative;
+  padding: 60px 0;
+  display: flex;
+  align-items: center;
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: 64px;
+  font-weight: 700;
+}
+
+.hero p {
+  color: color-mix(in srgb, var(--default-color), transparent 30%);
+  margin: 5px 0 30px 0;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.hero .btn-get-started {
+  color: var(--contrast-color);
+  background: var(--accent-color);
+  font-weight: 400;
+  font-size: 15px;
+  letter-spacing: 1px;
+  display: inline-block;
+  padding: 10px 28px 12px 28px;
+  border-radius: 50px;
+  transition: 0.5s;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.1);
+}
+
+.hero .btn-get-started:hover {
+  color: var(--contrast-color);
+  background: color-mix(in srgb, var(--accent-color), transparent 15%);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.1);
+}
+
+.hero .btn-watch-video {
+  font-size: 16px;
+  transition: 0.5s;
+  margin-left: 25px;
+  color: var(--default-color);
+  font-weight: 500;
+}
+
+.hero .btn-watch-video i {
+  color: var(--accent-color);
+  font-size: 32px;
+  transition: 0.3s;
+  line-height: 0;
+  margin-right: 8px;
+}
+
+.hero .btn-watch-video:hover {
+  color: var(--accent-color);
+}
+
+.hero .btn-watch-video:hover i {
+  color: color-mix(in srgb, var(--accent-color), transparent 15%);
+}
+
+.hero .animated {
+  animation: up-down 2s ease-in-out infinite alternate-reverse both;
+}
+
+@media (max-width: 640px) {
+  .hero h1 {
+    font-size: 28px;
+    line-height: 36px;
+  }
+
+  .hero p {
+    font-size: 18px;
+    line-height: 24px;
+    margin-bottom: 30px;
+  }
+
+  .hero .btn-get-started,
+  .hero .btn-watch-video {
+    font-size: 13px;
+  }
+}
+
+@keyframes up-down {
+  0% {
+    transform: translateY(10px);
+  }
+
+  100% {
+    transform: translateY(-10px);
+  }
+}
+
+/*--------------------------------------------------------------
+# About Section
+--------------------------------------------------------------*/
+.about h3 {
+  font-weight: 700;
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.about .book-a-table {
+  text-align: center;
+  border: 4px solid color-mix(in srgb, var(--default-color), transparent 30%);
+  padding: 22px;
+}
+
+.about .book-a-table h3 {
+  font-family: var(--default-font);
+  margin: 0 0 0 0;
+  font-size: 24px;
+}
+
+.about .book-a-table p {
+  color: var(--accent-color);
+  font-weight: 500;
+  font-size: 28px;
+  margin: 0;
+}
+
+.about .fst-italic {
+  color: color-mix(in srgb, var(--default-color), var(--contrast-color) 50%);
+}
+
+.about .content ul {
+  list-style: none;
+  padding: 0;
+}
+
+.about .content ul li {
+  padding: 0 0 10px 30px;
+  position: relative;
+}
+
+.about .content ul i {
+  position: absolute;
+  font-size: 20px;
+  left: 0;
+  top: -3px;
+  color: var(--accent-color);
+}
+
+.about .content p:last-child {
+  margin-bottom: 0;
+}
+
+.about .pulsating-play-btn {
+  position: absolute;
+  left: calc(50% - 47px);
+  top: calc(50% - 47px);
+}
+
+/*--------------------------------------------------------------
+# Why Us Section
+--------------------------------------------------------------*/
+.why-us .why-box {
+  color: var(--contrast-color);
+  background: var(--accent-color);
+  padding: 30px;
+}
+
+.why-us .why-box h3 {
+  color: var(--contrast-color);
+  font-family: var(--default-font);
+  font-weight: 700;
+  font-size: 34px;
+  margin-bottom: 30px;
+}
+
+.why-us .why-box p {
+  margin-bottom: 30px;
+}
+
+.why-us .why-box .more-btn {
+  display: inline-block;
+  background: color-mix(in srgb, var(--contrast-color), transparent 85%);
+  padding: 8px 40px 10px 40px;
+  color: var(--contrast-color);
+  transition: all ease-in-out 0.4s;
+  border-radius: 50px;
+}
+
+.why-us .why-box .more-btn i {
+  font-size: 14px;
+}
+
+.why-us .why-box .more-btn:hover {
+  color: var(--accent-color);
+  background: var(--surface-color);
+}
+
+.why-us .icon-box {
+  background-color: var(--surface-color);
+  text-align: center;
+  padding: 40px 30px;
+  width: 100%;
+  height: 100%;
+  border: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
+}
+
+.why-us .icon-box i {
+  color: var(--accent-color);
+  font-size: 32px;
+  margin-bottom: 30px;
+  background: color-mix(in srgb, var(--accent-color), transparent 95%);
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+  transition: 0.3s;
+}
+
+.why-us .icon-box h4 {
+  font-size: 20px;
+  font-weight: 500;
+  margin: 0 0 30px 0;
+  font-family: var(--default-font);
+}
+
+.why-us .icon-box p {
+  font-size: 15px;
+  color: color-mix(in srgb, var(--default-color), transparent 30%);
+}
+
+.why-us .icon-box:hover i {
+  color: var(--contrast-color);
+  background: var(--accent-color);
+}
+
+/*--------------------------------------------------------------
+# Stats Section
+--------------------------------------------------------------*/
+.stats {
+  position: relative;
+  padding: 120px 0;
+}
+
+.stats img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+.stats:before {
+  content: "";
+  background: color-mix(in srgb, var(--background-color), transparent 40%);
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+}
+
+.stats .container {
+  position: relative;
+  z-index: 3;
+}
+
+.stats .stats-item {
+  padding: 30px;
+  width: 100%;
+}
+
+.stats .stats-item span {
+  font-size: 48px;
+  display: block;
+  color: var(--default-color);
+  font-weight: 700;
+}
+
+.stats .stats-item p {
+  padding: 0;
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: color-mix(in srgb, var(--default-color), transparent 40%);
+}
+
+/*--------------------------------------------------------------
+# Menu Section
+--------------------------------------------------------------*/
+.menu .nav-tabs {
+  border: 0;
+}
+
+.menu .nav-link {
+  background-color: var(--background-color);
+  color: color-mix(in srgb, var(--default-color), transparent 20%);
+  margin: 0 15px;
+  padding: 10px 5px;
+  transition: 0.3s;
+  border-radius: 0;
+  cursor: pointer;
+  height: 100%;
+  border: 0;
+  border-bottom: 2px solid color-mix(in srgb, var(--default-color), transparent 80%);
+}
+
+@media (max-width: 575px) {
+  .menu .nav-link {
+    margin: 0 10px;
+    padding: 10px 0;
+  }
+}
+
+.menu .nav-link i {
+  padding-right: 15px;
+  font-size: 48px;
+}
+
+.menu .nav-link h4 {
+  font-size: 18px;
+  font-weight: 400;
+  margin: 0;
+  font-family: var(--default-font);
+}
+
+@media (max-width: 575px) {
+  .menu .nav-link h4 {
+    font-size: 16px;
+  }
+}
+
+.menu .nav-link:hover {
+  color: var(--accent-color);
+  border-color: var(--accent-color);
+}
+
+.menu .nav-link.active {
+  background-color: var(--background-color);
+  color: var(--accent-color);
+  border-color: var(--accent-color);
+}
+
+.menu .tab-content .tab-header {
+  padding: 30px 0;
+}
+
+.menu .tab-content .tab-header p {
+  font-size: 14px;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--default-color), transparent 20%);
+  margin-bottom: 0;
+}
+
+.menu .tab-content .tab-header h3 {
+  font-size: 48px;
+  font-weight: 700;
+  color: var(--accent-color);
+}
+
+.menu .tab-content .menu-item {
+  text-align-last: center;
+}
+
+.menu .tab-content .menu-item .menu-img {
+  padding: 0 60px;
+  margin-bottom: 15px;
+}
+
+.menu .tab-content .menu-item h4 {
+  font-size: 24px;
+  font-weight: 400;
+  margin-bottom: 5px;
+  font-family: var(--default-font);
+}
+
+.menu .tab-content .menu-item .ingredients {
+  font-family: var(--nav-font);
+  color: color-mix(in srgb, var(--default-color), transparent 50%);
+  margin-bottom: 5px;
+}
+
+.menu .tab-content .menu-item .price {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--accent-color);
+}
+
+/*--------------------------------------------------------------
+# Testimonials Section
+--------------------------------------------------------------*/
+.testimonials .testimonials-carousel,
+.testimonials .testimonials-slider {
+  overflow: hidden;
+}
+
+.testimonials .testimonial-item .testimonial-content {
+  border-left: 3px solid var(--accent-color);
+  padding-left: 30px;
+}
+
+.testimonials .testimonial-item .testimonial-img {
+  border-radius: 50%;
+  border: 4px solid var(--background-color);
+  margin: 0 auto;
+}
+
+.testimonials .testimonial-item h3 {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 10px 0 5px 0;
+}
+
+.testimonials .testimonial-item h4 {
+  font-size: 14px;
+  color: color-mix(in srgb, var(--default-color), transparent 40%);
+  margin: 0 0 10px 0;
+}
+
+.testimonials .testimonial-item .stars i {
+  color: #ffc107;
+  margin: 0 1px;
+}
+
+.testimonials .testimonial-item .quote-icon-left,
+.testimonials .testimonial-item .quote-icon-right {
+  color: color-mix(in srgb, var(--accent-color), transparent 50%);
+  font-size: 26px;
+  line-height: 0;
+}
+
+.testimonials .testimonial-item .quote-icon-left {
+  display: inline-block;
+  left: -5px;
+  position: relative;
+}
+
+.testimonials .testimonial-item .quote-icon-right {
+  display: inline-block;
+  right: -5px;
+  position: relative;
+  top: 10px;
+  transform: scale(-1, -1);
+}
+
+.testimonials .testimonial-item p {
+  font-style: italic;
+}
+
+.testimonials .swiper-wrapper {
+  height: auto;
+}
+
+.testimonials .swiper-pagination {
+  margin-top: 30px;
+  position: relative;
+}
+
+.testimonials .swiper-pagination .swiper-pagination-bullet {
+  width: 12px;
+  height: 12px;
+  background-color: color-mix(in srgb, var(--default-color), transparent 85%);
+  opacity: 1;
+}
+
+.testimonials .swiper-pagination .swiper-pagination-bullet-active {
+  background-color: var(--accent-color);
+}
+
+/*--------------------------------------------------------------
+# Events Section
+--------------------------------------------------------------*/
+.events .container-fluid {
+  padding: 0;
+}
+
+.events .event-item {
+  background-size: cover;
+  background-position: cente;
+  min-height: 600px;
+  padding: 30px;
+}
+
+@media (max-width: 575px) {
+  .events .event-item {
+    min-height: 500px;
+  }
+}
+
+.events .event-item:before {
+  content: "";
+  background: rgba(0, 0, 0, 0.6);
+  position: absolute;
+  inset: 0;
+}
+
+.events .event-item h3 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 5px;
+  color: #ffffff;
+  position: relative;
+}
+
+.events .event-item .price {
+  color: #ffffff;
+  border-bottom: 2px solid var(--accent-color);
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 15px;
+  position: relative;
+}
+
+.events .event-item .description {
+  margin-bottom: 0;
+  color: rgba(255, 255, 255, 0.8);
+  position: relative;
+}
+
+.events .swiper-wrapper {
+  height: auto;
+}
+
+.events .swiper-pagination {
+  margin-top: 20px;
+  position: relative;
+}
+
+.events .swiper-pagination .swiper-pagination-bullet {
+  width: 10px;
+  height: 10px;
+  background-color: color-mix(in srgb, var(--default-color), transparent 85%);
+  opacity: 1;
+}
+
+.events .swiper-pagination .swiper-pagination-bullet-active {
+  background-color: var(--accent-color);
+}
+
+/*--------------------------------------------------------------
+# Chefs Section
+--------------------------------------------------------------*/
+.chefs .team-member {
+  background-color: var(--surface-color);
+  box-shadow: 0px 0 30px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  text-align: center;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+.chefs .team-member .member-img {
+  position: relative;
+  overflow: hidden;
+}
+
+.chefs .team-member .member-img:after {
+  position: absolute;
+  content: "";
+  left: -1px;
+  right: -1px;
+  bottom: -1px;
+  height: 100%;
+  background-color: var(--surface-color);
+  -webkit-mask: url("../img/team-shape.svg") no-repeat center bottom;
+  mask: url("../img/team-shape.svg") no-repeat center bottom;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  z-index: 1;
+}
+
+.chefs .team-member .social {
+  position: absolute;
+  right: -100%;
+  top: 30px;
+  opacity: 0;
+  border-radius: 4px;
+  transition: 0.5s;
+  background: color-mix(in srgb, var(--background-color), transparent 60%);
+  z-index: 2;
+}
+
+.chefs .team-member .social a {
+  transition: color 0.3s;
+  color: color-mix(in srgb, var(--default-color), transparent 50%);
+  margin: 15px 12px;
+  display: block;
+  line-height: 0;
+  text-align: center;
+}
+
+.chefs .team-member .social a:hover {
+  color: var(--default-color);
+}
+
+.chefs .team-member .social i {
+  font-size: 18px;
+}
+
+.chefs .team-member .member-info {
+  padding: 10px 15px 20px 15px;
+}
+
+.chefs .team-member .member-info h4 {
+  font-weight: 700;
+  margin-bottom: 5px;
+  font-size: 20px;
+  font-family: var(--default-font);
+}
+
+.chefs .team-member .member-info span {
+  display: block;
+  font-size: 14px;
+  font-weight: 400;
+  color: color-mix(in srgb, var(--default-color), transparent 50%);
+}
+
+.chefs .team-member .member-info p {
+  font-style: italic;
+  font-size: 14px;
+  padding-top: 15px;
+  line-height: 26px;
+  color: color-mix(in srgb, var(--default-color), transparent 30%);
+}
+
+.chefs .team-member:hover {
+  transform: scale(1.08);
+  box-shadow: 0px 0 30px rgba(0, 0, 0, 0.1);
+}
+
+.chefs .team-member:hover .social {
+  right: 8px;
+  opacity: 1;
+}
+
+/*--------------------------------------------------------------
+# Book A Table Section
+--------------------------------------------------------------*/
+.book-a-table .reservation-img {
+  min-height: 500px;
+  background-size: cover;
+  background-position: center;
+}
+
+.book-a-table .reservation-form-bg {
+  background: color-mix(in srgb, var(--default-color), transparent 97%);
+}
+
+.book-a-table .php-email-form {
+  padding: 30px;
+}
+
+@media (max-width: 575px) {
+  .book-a-table .php-email-form {
+    padding: 20px;
+  }
+}
+
+.book-a-table .php-email-form input[type=text],
+.book-a-table .php-email-form input[type=email],
+.book-a-table .php-email-form input[type=number],
+.book-a-table .php-email-form input[type=date],
+.book-a-table .php-email-form input[type=time],
+.book-a-table .php-email-form textarea {
+  font-size: 14px;
+  padding: 10px 15px;
+  box-shadow: none;
+  border-radius: 0;
+  color: var(--default-color);
+  background-color: color-mix(in srgb, var(--background-color), transparent 20%);
+  border-color: color-mix(in srgb, var(--default-color), transparent 80%);
+}
+
+.book-a-table .php-email-form input[type=text]:focus,
+.book-a-table .php-email-form input[type=email]:focus,
+.book-a-table .php-email-form input[type=number]:focus,
+.book-a-table .php-email-form input[type=date]:focus,
+.book-a-table .php-email-form input[type=time]:focus,
+.book-a-table .php-email-form textarea:focus {
+  border-color: var(--accent-color);
+}
+
+.book-a-table .php-email-form input[type=text]::placeholder,
+.book-a-table .php-email-form input[type=email]::placeholder,
+.book-a-table .php-email-form input[type=number]::placeholder,
+.book-a-table .php-email-form input[type=date]::placeholder,
+.book-a-table .php-email-form input[type=time]::placeholder,
+.book-a-table .php-email-form textarea::placeholder {
+  color: color-mix(in srgb, var(--default-color), transparent 70%);
+}
+
+.book-a-table .php-email-form button[type=submit] {
+  color: var(--contrast-color);
+  background: var(--accent-color);
+  border: 0;
+  padding: 14px 60px;
+  transition: 0.4s;
+  border-radius: 4px;
+}
+
+.book-a-table .php-email-form button[type=submit]:hover {
+  background: color-mix(in srgb, var(--accent-color), transparent 20%);
+}
+
+/*--------------------------------------------------------------
+# Gallery Section
+--------------------------------------------------------------*/
+.gallery {
+  overflow: hidden;
+}
+
+.gallery .swiper-wrapper {
+  height: auto;
+}
+
+.gallery .swiper-pagination {
+  margin-top: 20px;
+  position: relative;
+}
+
+.gallery .swiper-pagination .swiper-pagination-bullet {
+  background-color: color-mix(in srgb, var(--default-color), transparent 85%);
+  border: 0;
+  width: 12px;
+  height: 12px;
+  opacity: 1;
+}
+
+.gallery .swiper-pagination .swiper-pagination-bullet-active {
+  background-color: var(--accent-color);
+  opacity: 1;
+}
+
+.gallery .swiper-slide-active {
+  text-align: center;
+}
+
+@media (min-width: 992px) {
+  .gallery .swiper-wrapper {
+    padding: 40px 0;
+  }
+
+  .gallery .swiper-slide-active {
+    background: var(--background-color);
+    border: 6px solid var(--accent-color);
+    padding: 4px;
+    z-index: 1;
+    transform: scale(1.2);
+    transition: none;
+  }
+}
+
+/*--------------------------------------------------------------
+# Contact Section
+--------------------------------------------------------------*/
+.contact .info-item {
+  background-color: var(--surface-color);
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+  padding: 20px 30px;
+}
+
+.contact .info-item .icon {
+  color: var(--contrast-color);
+  background-color: var(--accent-color);
+  width: 56px;
+  height: 56px;
+  font-size: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease-in-out;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+.contact .info-item h3 {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0 0 5px 0;
+  font-family: var(--default-font);
+  color: color-mix(in srgb, var(--default-color), transparent 30%);
+}
+
+.contact .info-item p {
+  padding: 0;
+  margin-bottom: 0;
+  font-size: 14px;
+}
+
+.contact .info-item .social-links a {
+  font-size: 24px;
+  display: inline-block;
+  line-height: 1;
+  margin: 4px 6px 0 0;
+  transition: 0.3s;
+  color: color-mix(in srgb, var(--default-color), transparent 50%);
+}
+
+.contact .info-item .social-links a:hover {
+  color: var(--accent-color);
+}
+
+.contact .php-email-form {
+  background-color: var(--surface-color);
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  margin-top: 30px;
+}
+
+@media (max-width: 575px) {
+  .contact .php-email-form {
+    padding: 20px;
+  }
+}
+
+.contact .php-email-form input[type=text],
+.contact .php-email-form input[type=email],
+.contact .php-email-form textarea {
+  color: var(--default-color);
+  background-color: color-mix(in srgb, var(--surface-color), transparent 50%);
+  border-color: color-mix(in srgb, var(--default-color), transparent 80%);
+  font-size: 14px;
+  padding: 10px 15px;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+.contact .php-email-form input[type=text]:focus,
+.contact .php-email-form input[type=email]:focus,
+.contact .php-email-form textarea:focus {
+  border-color: var(--accent-color);
+}
+
+.contact .php-email-form input[type=text]::placeholder,
+.contact .php-email-form input[type=email]::placeholder,
+.contact .php-email-form textarea::placeholder {
+  color: color-mix(in srgb, var(--default-color), transparent 70%);
+}
+
+.contact .php-email-form button[type=submit] {
+  color: var(--contrast-color);
+  background: var(--accent-color);
+  border: 0;
+  padding: 10px 30px;
+  transition: 0.4s;
+  border-radius: 50px;
+}
+
+.contact .php-email-form button[type=submit]:hover {
+  background: color-mix(in srgb, var(--accent-color), transparent 20%);
+}
+
+/*--------------------------------------------------------------
+# Starter Section Section
+--------------------------------------------------------------*/
+  </style>
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Amatic+SC:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+  
+
+  <!-- =======================================================
+  * Template Name: Yummy
+  * Template URL: https://bootstrapmade.com/yummy-bootstrap-restaurant-website-template/
+  * Updated: Jun 29 2024 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body class="index-page">
+
+  <header id="header" class="header d-flex align-items-center sticky-top">
+    <div class="container position-relative d-flex align-items-center justify-content-between">
+
+      <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <!-- <img src="assets/img/logo.png" alt=""> -->
+        <div class="logo-container">
+          <img src="assets/img/mrlogo.jpg" alt="Miracle Logo" class="circular-logo">
+      </div>
+        <h1 class="sitename">NIRMAATA</h1>
+        <span></span>
+      </a>
+
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="#hero" class="active">Home<br></a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#menu">Category</a></li>
+          <li><a href="#testimonials">ActivityTrack</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+
+      <a class="btn-getstarted" href="LoginPage/login.html">SignUp</a>
+
+    </div>
+  </header>
+
+  <main class="main">
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero section light-background">
+
+      <div class="container">
+        <div class="row gy-4 justify-content-center justify-content-lg-between">
+          <div class="col-lg-5 order-2 order-lg-1 d-flex flex-column justify-content-center">
+              <h1 data-aos="fade-up">expectant mothers to shape their unborn child's future brilliance based on their aspirations and nurturing thoughts</h1>
+
+            <h1 data-aos="fade-up">
+
+            </h1>
+    <div class="center-circle">
+      <div class="main-circle"></div>
+      <div class="orbit">
+          <div class="small-circle circle1"><span>Visionary Thinking</span></div>
+          <div class="small-circle circle2"><span>Innovative Thinking</span></div>
+          <div class="small-circle circle3"><span>Resilience</span></div>
+          <div class="small-circle circle4"><span>Integrity</span></div>
+          <div class="small-circle circle5"><span>Empathy</span></div>
+          <div class="small-circle circle6"><span>Intuition</span></div>
+          <div class="small-circle circle7"><span>Creativity</span></div>
+      </div>
+      </div>
+
+    </section><!-- /Hero Section -->
+
+    <!-- About Section -->
+    <section id="about" class="about section">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>About Us<br></h2>
+        <p><span>Learn More</span> <span class="description-title">About Us</span></p>
+      </div><!-- End Section Title -->
+      <div class="container">
+
+        <div class="row gy-4">
+          <div class="col-lg-7" data-aos="fade-up" data-aos-delay="100">
+            <img src="./assets/img/about.jpg" class="img-fluid mb-4" alt="">
+           
+          </div>
+          <div class="col-lg-5" data-aos="fade-up" data-aos-delay="250">
+            <div class="content ps-0 ps-lg-5">
+              <p class="fst-italic">
+                Welcome to NIRMAATA, where we believe in shaping the future, one pregnancy at a time. 
+              </p>
+              <ul>
+                <li><i class="bi bi-check-circle-fill"></i> <span>Customized Content: Personalized music, movie suggestions, and stories to keep mothers in a positive and nurturing state of mind.</span></li>
+                <li><i class="bi bi-check-circle-fill"></i> <span>Mental and Emotional Support: Resources and activities designed to promote a calm and happy pregnancy experience.</span></li>
+                <li><i class="bi bi-check-circle-fill"></i> <span>Technological Integration: Leveraging the latest technology to provide insights and support for expectant mothers.</span></li>
+              </ul>
+              <p>
+                At NIRMAATA, our mission is to provide personalized and comprehensive care for pregnant women, ensuring that every child is born with the qualities their parents envision. We understand the importance of a mother's well-being and the profound impact it has on the developing child. Our goal is to support mothers through every step of their pregnancy journey, fostering an environment that promotes the development of leadership qualities and other desired traits in their children.
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </section><!-- /About Section -->
+
+
+
+
+    <!-- Menu Section -->
+    <section id="menu" class="menu section">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <p><span>Create Your</span> <span class="description-title">Reality</span></p>
+      </div><!-- End Section Title -->
+
+      <div class="container">
+
+        <ul class="nav nav-tabs d-flex justify-content-center" data-aos="fade-up" data-aos-delay="100">
+
+          <li class="nav-item">
+            <a class="nav-link active show" data-bs-toggle="tab" data-bs-target="#menu-starters">
+              <h4>Stories</h4>
+            </a>
+          </li><!-- End tab nav item -->
+
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="tab" data-bs-target="#menu-breakfast">
+              <h4>Chants</h4>
+            </a><!-- End tab nav item -->
+
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="tab" data-bs-target="#menu-lunch">
+              <h4>Music</h4>
+            </a>
+          </li><!-- End tab nav item -->
+
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="tab" data-bs-target="#menu-dinner">
+              <h4>Videos</h4>
+            </a>
+          </li><!-- End tab nav item -->
+
+        </ul>
+
+        <div class="tab-content" data-aos="fade-up" data-aos-delay="200">
+
+          <div class="tab-pane fade active show" id="menu-starters">
+
+            <div class="tab-header text-center">
+            </div>
+
+            <div class="row gy-5">
+
+              <div class="col-lg-4 menu-item">
+                <a href="assets/img/stories/menu-item-1.png" class="glightbox"><img src="assets/img/menu/menu-item-1.png" class="menu-img img-fluid" alt=""></a>
+                <h4>Bhagavad Geeta</h4>
+                <p class="ingredients">
+                  Spiritual Guidance,Dharma, <br/>Spiritual Liberation,Nature of Reality
+                </p>
+              </div><!-- Menu Item -->
+
+              <div class="col-lg-4 menu-item">
+                <a href="assets/img/menu/menu-item-2.png" class="glightbox"><img src="assets/img/menu/menu-item-2.png" class="menu-img img-fluid" alt=""></a>
+                <h4>Heart of Goal</h4>
+                <p class="ingredients">
+                  Impact of Good Deeds,Moral Lesson<br/>,Kindness
+                </p>
+              </div><!-- Menu Item -->
+
+              <div class="col-lg-4 menu-item">
+                <a href="assets/img/menu/menu-item-3.png" class="glightbox"><img src="assets/img/menu/menu-item-3.png" class="menu-img img-fluid" alt=""></a>
+                <h4>Panchtantra Tales</h4>
+                <p class="ingredients">
+                  Unity is Strength,Wise Actions Lead to Success<br/>Greed Leads to Destruction
+                </p>
+              </div><!-- Menu Item -->
+
+              <div class="col-lg-4 menu-item">
+                <a href="assets/img/menu/menu-item-4.png" class="glightbox"><img src="assets/img/menu/menu-item-4.png" class="menu-img img-fluid" alt=""></a>
+                <h4>The Story of Buddhas</h4>
+                <p class="ingredients">
+                  Promotes Calmness and Peace, Reduces Stress and Anxiety<br/>,Spiritual Growth and Connection
+                </p>
+                
+              </div><!-- Menu Item -->
+
+              <div class="col-lg-4 menu-item">
+                <a href="assets/img/menu/menu-item-5.png" class="glightbox"><img src="assets/img/menu/menu-item-5.png" class="menu-img img-fluid" alt=""></a>
+                <h4>The Story of River</h4>
+                <p class="ingredients">
+                  Cultural Connection and Emotional Bonding<br/>,Environmental Awareness
+                </p>
+                
+              </div><!-- Menu Item -->
+
+              <div class="col-lg-4 menu-item">
+                <a href="assets/img/menu/menu-item-6.png" class="glightbox"><img src="assets/img/menu/menu-item-6.png" class="menu-img img-fluid" alt=""></a>
+                <h4>Ramayana</h4>
+                <p class="ingredients">
+                  Moral and Ethical Values,Positive Energy and Mental Peace<br/>,Cultural and Spiritual Connection
+                </p>
+              </div><!-- Menu Item -->
+
+            </div>
+          </div><!-- End Starter Menu Content -->
+
+          <div class="tab-pane fade" id="menu-breakfast">
+
+            <div class="tab-header text-center">
+              <p>Chants</p>
+              <h3>Mantras</h3>
+            </div>
+
+            <div class="row gy-5">
+
+              <div class="col-lg-4 menu-item">
+                <a href="assets/img/chants/menu-item-1.png" class="glightbox"><img src="assets/img/chants/menu-item-1.png" class="menu-img img-fluid" alt=""></a>
+                <h4>Magnam Tiste</h4>
+                <p class="ingredients">
+                  Lorem, deren, trataro, filede, nerada
+                </p>
+              </div><!-- Menu Item -->
+
+              <div class="col-lg-4 menu-item">
+                <a href="assets/img/chants/menu-item-2.png.jpg" class="glightbox"><img src="assets/img/chants/menu-item-2.png.jpg" class="menu-img img-fluid" alt=""></a>
+                <h4>Laxmi Gayatri Mantra</h4>
+                <p class="ingredients">
+                  blessings for the well-being 
+                </p>
+               
+              </div><!-- Menu Item -->
+
+              <div class="col-lg-4 menu-item">
+                <a href="assets/img/menu-item-3.png" class="glightbox"><img src="assets/img/chants/menu-item-3.png" class="menu-img img-fluid" alt=""></a>
+                <h4>Est Eligendi</h4>
+                <p class="ingredients">
+                 
+                </p>
+              </div><!-- Menu Item -->
+    <!-- Menu Item -->
+
+              <!-- Menu Item -->
+               <!-- Menu Item -->
+
+            </div>
+          </div><!-- End Breakfast Menu Content -->
+
+          <div class="tab-pane fade" id="menu-lunch">
+
+            <div class="tab-header text-center">
+              <p>Music</p>
+              <h3>Feel Stress Free</h3>
+            </div>
+
+            <div class="row gy-5">
+
+              <div class="col-lg-4 menu-item">
+                <a href="assets/img/music/menu-item-1.png" class="glightbox"><img src="assets/img/music/menu-item-1.png" class="menu-img img-fluid" alt=""></a>
+                <h4>Classical music</h4>
+                <p class="ingredients">
+                  Lorem, deren, trataro, filede, nerada
+                </p>
+               
+              </div><!-- Menu Item -->
+
+              <div class="col-lg-4 menu-item">
+                <a href="assets/img/music/menu-item-2.png" class="glightbox"><img src="assets/img/music/menu-item-2.png" class="menu-img img-fluid" alt=""></a>
+                <h4></h4>
+                <p class="ingredients">
+                  Lorem, deren, trataro, filede, nerada
+                </p>
+              
+              </div><!-- Menu Item -->
+
+  <!-- /Menu Section -->
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials section light-background">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Activity Track</h2>
+        <p>What she do in whole day <span class="description-title">Saying About her</span></p>
+      </div><!-- End Section Title -->
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="swiper init-swiper">
+          <script type="application/json" class="swiper-config">
+            {
+              "loop": true,
+              "speed": 600,
+              "autoplay": {
+                "delay": 5000
+              },
+              "slidesPerView": "auto",
+              "pagination": {
+                "el": ".swiper-pagination",
+                "type": "bullets",
+                "clickable": true
+              }
+            }
+          </script>
+          <div class="swiper-wrapper">
+
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                <div class="row gy-4 justify-content-center">
+                  <div class="col-lg-6">
+                    <div class="testimonial-content">
+                      <p>
+                        <i class="bi bi-quote quote-icon-left"></i>
+                        <span>Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.</span>
+                        <i class="bi bi-quote quote-icon-right"></i>
+                      </p>
+                      <h3>Saul Goodman</h3>
+                      <h4>Ceo &amp; Founder</h4>
+                      <div class="stars">
+                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-2 text-center">
+                    <img src="assets/img/testimonials/testimonials-1.jpg" class="img-fluid testimonial-img" alt="">
+                  </div>
+                </div>
+              </div>
+            </div><!-- End testimonial item -->
+
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                <div class="row gy-4 justify-content-center">
+                  <div class="col-lg-6">
+                    <div class="testimonial-content">
+                      <p>
+                        <i class="bi bi-quote quote-icon-left"></i>
+                        <span>Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.</span>
+                        <i class="bi bi-quote quote-icon-right"></i>
+                      </p>
+                      <h3>Sara Wilsson</h3>
+                      <h4>Designer</h4>
+                      <div class="stars">
+                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-2 text-center">
+                    <img src="assets/img/testimonials/testimonials-2.jpg" class="img-fluid testimonial-img" alt="">
+                  </div>
+                </div>
+              </div>
+            </div><!-- End testimonial item -->
+
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                <div class="row gy-4 justify-content-center">
+                  <div class="col-lg-6">
+                    <div class="testimonial-content">
+                      <p>
+                        <i class="bi bi-quote quote-icon-left"></i>
+                        <span>Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis minim tempor labore quem eram duis noster aute amet eram fore quis sint minim.</span>
+                        <i class="bi bi-quote quote-icon-right"></i>
+                      </p>
+                      <h3>Jena Karlis</h3>
+                      <h4>Store Owner</h4>
+                      <div class="stars">
+                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-2 text-center">
+                    <img src="assets/img/testimonials/testimonials-3.jpg" class="img-fluid testimonial-img" alt="">
+                  </div>
+                </div>
+              </div>
+            </div><!-- End testimonial item -->
+
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                <div class="row gy-4 justify-content-center">
+                  <div class="col-lg-6">
+                    <div class="testimonial-content">
+                      <p>
+                        <i class="bi bi-quote quote-icon-left"></i>
+                        <span>Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat minim velit minim dolor enim duis veniam ipsum anim magna sunt elit fore quem dolore labore illum veniam.</span>
+                        <i class="bi bi-quote quote-icon-right"></i>
+                      </p>
+                      <h3>John Larson</h3>
+                      <h4>Entrepreneur</h4>
+                      <div class="stars">
+                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-2 text-center">
+                    <img src="assets/img/testimonials/testimonials-4.jpg" class="img-fluid testimonial-img" alt="">
+                  </div>
+                </div>
+              </div>
+            </div><!-- End testimonial item -->
+
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+
+      </div>
+
+    </section><!-- /Testimonials Section -->
+          
+
+         
+
+       <!-- /Contact Section -->
+
+  </main>
+
+  <footer id="footer" class="footer dark-background">
+
+    <div class="container">
+      <div class="row gy-3">
+        <div class="col-lg-3 col-md-6 d-flex">
+          <i class="bi bi-geo-alt icon"></i>
+          <div class="address">
+            <h4>Address</h4>
+            <p>G D Badaya Auditorium </p>
+            <p>Jaipur,Rajasthan</p>
+            <p></p>
+          </div>
+
+        </div>
+
+        <div class="col-lg-3 col-md-6 d-flex">
+          <i class="bi bi-telephone icon"></i>
+          <div>
+            <h4>Contact</h4>
+            <p>
+              <strong>Phone:</strong> <span>8459981729</span><br>
+              <strong>Email:</strong> <span>mihileshraut7@gmail.com</span><br>
+            </p>
+          </div>
+        </div>
+
+      
+
+        <div class="col-lg-3 col-md-6">
+          <h4>Follow Us</h4>
+          <div class="social-links d-flex">
+            <a href="#" class="twitter"><i class="bi bi-twitter-x"></i></a>
+            <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+            <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+            <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    
+
+  </footer>
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+  <!-- Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>
